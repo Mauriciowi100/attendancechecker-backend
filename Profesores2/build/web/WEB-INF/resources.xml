@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <Resource id="Asistencias" type="javax.sql.DataSource">#Mon Nov 02 21:29:34 MST 2020
+jdbcDriver=com.mysql.jdbc.Driver
+password=
+userName=root
+jdbcUrl=jdbc\:mysql\://localhost\:3306/asistencias?zeroDateTimeBehavior\=convertToNull
+</Resource>
+</resources>
