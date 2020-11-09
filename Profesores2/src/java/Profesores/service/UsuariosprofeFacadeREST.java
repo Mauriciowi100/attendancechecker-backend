@@ -34,7 +34,16 @@ public class UsuariosprofeFacadeREST extends AbstractFacade<Usuariosprofe> {
     public UsuariosprofeFacadeREST() {
         super(Usuariosprofe.class);
     }
-
+    
+    @POST
+    @Override
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void create(Usuariosprofe entity) {
+        System.out.println("ESTE ES EL ENTITY.");
+        System.out.println(entity);
+        super.create(entity);
+    }
+    
     @POST
     @Path("{id}/{nombre}/{apellido}/{correo}/{contrasena}/{usuario}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -59,7 +68,7 @@ public class UsuariosprofeFacadeREST extends AbstractFacade<Usuariosprofe> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public Usuariosprofe find(@PathParam("id") Integer id) {
         return super.find(id);
     }
