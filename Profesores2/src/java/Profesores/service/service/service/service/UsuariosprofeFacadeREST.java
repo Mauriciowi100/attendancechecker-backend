@@ -64,23 +64,21 @@ public class UsuariosprofeFacadeREST extends AbstractFacade<Usuariosprofe> {
     @Path("/{contra}/{usuario}/{email}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public NewClass find(@PathParam("contra") String contra,@PathParam("email") String email,@PathParam("user") String user) {
+    public String find(@PathParam("contra") String contra,@PathParam("email") String email,@PathParam("user") String user) {
         Gson gson = new Gson();
                 Usuariosprofe prof = new Usuariosprofe(0, email, contra, user, "","");
                 List<Usuariosprofe> findAll = super.findAll();
                 for (int i = 0; i < findAll.size(); i++) {
                     if(findAll().get(i).equals(prof))
                     {
-                        NewClass b = new NewClass(true);
                         System.out.println("Sesion iniciada");
-                        return b;
+                        return "true";
                     }
                 
         }
                 
-        NewClass b = new NewClass(false);
                 System.out.println("Pendejo");
-        return b;
+        return "false";
     }
     
     @GET
