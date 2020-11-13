@@ -39,19 +39,43 @@ public class UsuariosprofeFacadeREST extends AbstractFacade<Usuariosprofe> {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void create(String json) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public String create(String json) {
         Gson gson = new Gson();
         System.out.println("ENTITY");
         System.out.println(json);
-        super.create(gson.fromJson(json, Usuariosprofe.class));
+        Usuariosprofe prof = gson.fromJson(json, Usuariosprofe.class);
+        List<Usuariosprofe> findAll = super.findAll();
+                for (int i = 0; i < findAll.size(); i++) {
+                    if(findAll().get(i).existe(prof))
+                    {
+                        System.out.println("Cuenta existente");
+                        return "Cuenta existente";
+                    }
+                }
+               
+       
+                        super.create(prof);
+                        System.out.println("Cuenta creada");
+                        return "Cuenta creada";
+                    
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Usuariosprofe entity) {
-        System.out.println(entity);
-        super.edit(entity);
+//        System.out.println(entity);
+//        List<Usuariosprofe> findAll = super.findAll();
+//                for (int i = 0; i < findAll.size(); i++) {
+//                    if(findAll().get(i).equals(entity))
+//                    {
+//                        System.out.println("Cuenta existente");
+//                        return "true";
+//                    }
+//        super.edit(entity);
+//        return "Cuenta creada";
+//                }
     }
 
     @DELETE
@@ -77,7 +101,7 @@ public class UsuariosprofeFacadeREST extends AbstractFacade<Usuariosprofe> {
                 
         }
                 
-                System.out.println("Pendejo");
+                System.out.println("Incorrecto");
         return "false";
     }
     

@@ -92,6 +92,14 @@ public class Usuariosprofe implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+    
+    public Boolean existe(Usuariosprofe prof)
+    {
+        if(this.correo.equalsIgnoreCase(prof.correo) || this.usuario.equalsIgnoreCase(prof.usuario))
+            return true;
+        else
+            return false;
+    }
     @Override
     public int hashCode() {
         int hash = 0;
