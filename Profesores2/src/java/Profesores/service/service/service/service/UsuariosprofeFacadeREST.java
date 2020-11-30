@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Profesores.service;
+package Profesores.service.service.service.service;
 
+import Profesores.NewClass;
 import Profesores.Usuariosprofe;
+import com.google.gson.Gson;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,7 +27,7 @@ import javax.ws.rs.core.MediaType;
  * @author Mauriciowi100
  */
 @Stateless
-@Path("profesores")
+@Path("prof")
 public class UsuariosprofeFacadeREST extends AbstractFacade<Usuariosprofe> {
 
     @PersistenceContext(unitName = "Profesores2PU")
@@ -34,29 +36,21 @@ public class UsuariosprofeFacadeREST extends AbstractFacade<Usuariosprofe> {
     public UsuariosprofeFacadeREST() {
         super(Usuariosprofe.class);
     }
-    
+
     @POST
-    @Override
-    @Consumes({MediaType.APPLICATION_JSON})
-    public void create(Usuariosprofe entity) {
-        System.out.println("ESTE ES EL ENTITY.");
-        System.out.println(entity);
-        super.create(entity);
-    }
-    
-    @POST
-    @Path("{id}/{nombre}/{apellido}/{correo}/{contrasena}/{usuario}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(@PathParam("id") Integer id, @PathParam("nombre") String nombre, @PathParam("apellido") String apellido, @PathParam("correo") String correo, @PathParam("contrasena") String contrasena, @PathParam("usuario") String usuario) {
-        System.out.println(id+nombre+apellido+usuario+contrasena+correo);
-        Usuariosprofe entity = new Usuariosprofe(id, correo, contrasena, usuario, nombre, apellido);
-        super.create(entity);
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void create(String json) {
+        Gson gson = new Gson();
+        System.out.println("ENTITY");
+        System.out.println(json);
+        super.create(gson.fromJson(json, Usuariosprofe.class));
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Usuariosprofe entity) {
+        System.out.println(entity);
         super.edit(entity);
     }
 
@@ -67,9 +61,31 @@ public class UsuariosprofeFacadeREST extends AbstractFacade<Usuariosprofe> {
     }
 
     @GET
+    @Path("/{contra}/{usuario}/{email}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String find(@PathParam("contra") String contra,@PathParam("email") String email,@PathParam("user") String user) {
+        Gson gson = new Gson();
+                Usuariosprofe prof = new Usuariosprofe(0, email, contra, user, "","");
+                List<Usuariosprofe> findAll = super.findAll();
+                for (int i = 0; i < findAll.size(); i++) {
+                    if(findAll().get(i).equals(prof))
+                    {
+                        System.out.println("Sesion iniciada");
+                        return "true";
+                    }
+                
+        }
+                
+                System.out.println("Pendejo");
+        return "false";
+    }
+    
+    @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
     public Usuariosprofe find(@PathParam("id") Integer id) {
+        System.out.println("AQUI");
         return super.find(id);
     }
 
@@ -77,7 +93,6 @@ public class UsuariosprofeFacadeREST extends AbstractFacade<Usuariosprofe> {
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Usuariosprofe> findAll() {
-        System.out.println("hola");
         return super.findAll();
     }
 

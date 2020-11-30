@@ -36,12 +36,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Usuariosprofe.findByApellido", query = "SELECT u FROM Usuariosprofe u WHERE u.apellido = :apellido")})
 public class Usuariosprofe implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -68,6 +62,13 @@ public class Usuariosprofe implements Serializable {
     @Column(name = "apellido")
     private String apellido;
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+
     public Usuariosprofe() {
     }
 
@@ -90,6 +91,24 @@ public class Usuariosprofe implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if ((this.correo.equalsIgnoreCase(((Usuariosprofe) object).getCorreo()) || this.usuario.equalsIgnoreCase(((Usuariosprofe) object).getUsuario())) && this.contraseña.equalsIgnoreCase(((Usuariosprofe) object).getContraseña())) {
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public String toString() {
+        return "Profesores.Usuariosprofe[ id=" + id + " ]";
     }
 
     public String getCorreo() {
@@ -130,31 +149,6 @@ public class Usuariosprofe implements Serializable {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuariosprofe)) {
-            return false;
-        }
-        Usuariosprofe other = (Usuariosprofe) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Profesores.Usuariosprofe[ id=" + id + " ]";
     }
     
 }
