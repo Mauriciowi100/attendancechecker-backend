@@ -1,7 +1,7 @@
-const Profesor = require('../models/Alumno');
+const Alumno = require('../models/Alumno');
 
 function index(req, res){
-    Profesor.find({})
+    Alumno.find({})
         .then(alumnos => {
                 if(alumnos.length) return res.status(200).send({alumnos});
                 return res.status(204).send({message: 'NO CONTENT'});
@@ -10,7 +10,7 @@ function index(req, res){
 
 function show(req, res){
     if(req.body.error) return res.status(500).send({error});
-    if(!req.body.profesors) return res.status(404).send({message: 'NOT FOUND'}); 
+    if(!req.body.alumnos) return res.status(404).send({message: 'NOT FOUND'}); 
     let alumnos = req.body.alumnos;
     return res.status(200).send({alumnos});   
 }
@@ -30,8 +30,8 @@ function update(req, res){
 
 function remove(req, res){
     if(req.body.error) return res.status(500).send({error});
-    if(!req.body.profesors) return res.status(404).send({message: "NOT FOUND"});
-    req.body.profesors[0].remove().then(product => res.status(200).send({message: 'REMOVED', product})).catch(error => res.status(500).send({error}));
+    if(!req.body.alumnos) return res.status(404).send({message: "NOT FOUND"});
+    req.body.alumnos[0].remove().then(product => res.status(200).send({message: 'REMOVED', product})).catch(error => res.status(500).send({error}));
 }
 
 function find(req, res, next){
@@ -42,9 +42,9 @@ function find(req, res, next){
     //console.log("Si LLEGO LA PET JEJE");
     //    console.log(query);
 
-    Profesor.find(query).then(profesors => {
-        if(!profesors.length) return next();
-        req.body.profesors = profesors;
+    Alumno.find(query).then(alumnos => {
+        if(!alumnos.length) return next();
+        req.body.alumnos = alumnos;
         return next();
     }).catch(error => {
         req.body.error = error;
