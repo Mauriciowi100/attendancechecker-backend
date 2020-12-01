@@ -36,7 +36,7 @@ function remove(req, res){
 
 function find(req, res, next){
     let query = {};
-    query["id"] = req.params.email;
+    query["id"] = req.params.id;
     //query['category'] = 'Hogarr';
 
     //console.log("Si LLEGO LA PET JEJE");
