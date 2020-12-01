@@ -17,7 +17,7 @@ const ClaseSchema = new mongoose.Schema({
     modalidad: {
         type: String,
         required: true,
-        enum: ['Virtual', 'Precencial', 'Hibrido']
+        enum: ['Virtual', 'Presencial', 'Hibrido']
     },
     periodo: {
         type: String,
