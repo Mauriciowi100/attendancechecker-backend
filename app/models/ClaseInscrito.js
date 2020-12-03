@@ -3,12 +3,14 @@ const mongoose = require('mongoose');
 const ClaseInscritoSchema = new mongoose.Schema({
     id_alumno: {
         type: String,
-        unique: true,
+        required: true
+    },
+    name: {
+        type: String,
         required: true
     },
     id_clase: {
         type: String,
-        unique: true,
         required: true
     },
 }); 

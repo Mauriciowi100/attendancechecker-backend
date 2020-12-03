@@ -9,6 +9,7 @@ const Alumno = require('./routes/alumno');
 const Clase = require('./routes/clase');
 const Asistencia = require('./routes/asistencia');
 const ClaseInscrito = require('./routes/claseinscrito');
+const AlumnoInscrito = require('./routes/alumnoinscrito');
 
 App.use(bodyParser.json());
 App.use(bodyParser.urlencoded({extended: false}));
@@ -19,5 +20,6 @@ App.use('/alumno', Alumno);
 App.use('/clase', Clase); 
 App.use('/asistencia', Asistencia); 
 App.use('/claseinscrito', ClaseInscrito); 
+App.use('/alumnoinscrito', AlumnoInscrito); 
 
 module.exports = App;
